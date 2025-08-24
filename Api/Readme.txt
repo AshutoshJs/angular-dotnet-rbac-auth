@@ -1,0 +1,1 @@
+- lat was doing integrating the entity framework with the classes and trying to connect to database without using chat gpt but reading from the xml comment in the classes of ef core and also trying to unsersatnd its meaning 
