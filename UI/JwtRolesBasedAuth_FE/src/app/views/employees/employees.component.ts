@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { TableModule } from 'primeng/table';
+import { Employee } from '../Models/EmployeModel';
 @Component({
   selector: 'app-employees',
   imports: [TableModule],
@@ -9,6 +10,8 @@ import { TableModule } from 'primeng/table';
 })
 export class EmployeesComponent implements OnInit {
 private http = inject(HttpClient);
+
+empList:Array<Employee>=[];
   ngOnInit(): void {
       
   
@@ -16,7 +19,7 @@ private http = inject(HttpClient);
 
   this.http .get<any>('https://localhost:7119/WeatherForecast').subscribe(
     response=>{
-      
+      this.empList=response;
      //console.log("response",response);  
       
      
