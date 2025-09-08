@@ -1,3 +1,4 @@
+using JwtRoledBasedAuth.CommonHeper.PaginationAndFilter;
 using JwtRoledBasedAuth.DbConnection;
 using JwtRoledBasedAuth.Models;
 using Microsoft.AspNetCore.Authorization;
@@ -7,7 +8,8 @@ namespace JwtRoledBasedAuth.Controllers
 {
     [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    // [Route("[controller]")] Giving swaggger error when added method GetEmpWithPagination
+    [Route("[controller]/[action]")]
     public class WeatherForecastController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
@@ -27,6 +29,7 @@ namespace JwtRoledBasedAuth.Controllers
         {
             using (var context = new MasterDbContext())
             {
+
                 return context.Employee.ToList();
             }
 
@@ -38,5 +41,43 @@ namespace JwtRoledBasedAuth.Controllers
             //})
             //.ToArray();
         }
+        
+        [HttpGet(Name = "/EmployeeWithPagination")]
+        public async  Task<IActionResult> GetEmpWithPagination([FromQuery] PageParameters pageParameters)
+        {
+            using (var context = new MasterDbContext())
+            {
+                
+                var query = context.Employee.AsQueryable();
+
+                if (!string.IsNullOrEmpty(pageParameters.FilterParam)) { 
+                
+                }
+                var pagedUsers = await PagedList<Employee>.CreateAsync(
+                        query,
+                        pageParameters.PageNumber,
+                        pageParameters.PageSize
+                    );
+                return Ok(pagedUsers);
+            }
+        }
+
+
+        /*[HttpGet(Name = "/EmployeeWithFilter")]
+        public async Task<IActionResult> GetEmpFiter([FromQuery] FilterModel filterParameters)
+        {
+            using (var context = new MasterDbContext())
+            {
+                var query = context.Employee.AsQueryable();
+
+                PageParameters
+                var pagedUsers = await PagedList<Employee>.CreateAsync(
+                        query,
+                        pageParameters.PageNumber,
+                        pageParameters.PageSize
+                    );
+                return Ok(pagedUsers);
+            }
+        }*/
     }
 }

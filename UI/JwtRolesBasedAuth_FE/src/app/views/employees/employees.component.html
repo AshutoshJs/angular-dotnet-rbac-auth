@@ -1,4 +1,4 @@
-<div class="row">
+<!-- <div class="row">
   <p-table  [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template #header>
         <tr>
@@ -19,9 +19,19 @@
     </ng-template>
 </p-table> 
 </div>
-
-<!--
-
-"node_modules/primeng/resources/themes/lara-light-blue/theme.css",
-    "node_modules/primeng/resources/primeng.min.css",
-    "node_modules/primeicons/primeicons.css"-->
+ -->
+<div class="card">
+<table>
+  <tr>
+    <th>businessEntityID</th>
+    <th>nationalIDNumber</th>
+  </tr>
+  @for(item of empList; track item) {
+  <tr>
+    <td>{{item.businessEntityID}}</td>
+    <td>{{item.nationalIDNumber}}</td>
+  </tr>
+}
+  
+</table>
+</div>
