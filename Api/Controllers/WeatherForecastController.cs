@@ -42,7 +42,7 @@ namespace JwtRoledBasedAuth.Controllers
             //.ToArray();
         }
         
-        [HttpGet(Name = "/EmployeeWithPagination")]
+        [HttpGet(Name = "EmployeeWithPagination")]
         public async  Task<IActionResult> GetEmpWithPagination([FromQuery] PageParameters pageParameters)
         {
             using (var context = new MasterDbContext())

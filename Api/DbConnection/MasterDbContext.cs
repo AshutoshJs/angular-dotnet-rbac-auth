@@ -7,6 +7,8 @@ namespace JwtRoledBasedAuth.DbConnection
     {
         public DbSet<Employee> Employee { get; set; }
         public DbSet<PersonEmailAddress> PersonEmailAddress { get; set; }
+
+        public DbSet<EmployeeDepartment> EmployeeDepartment { get; set; }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=ASHUTOSH-PC\MSSQLSERVER01;Database=JWT_Adventutrworks;Trusted_Connection=True;TrustServerCertificate=True");
@@ -44,6 +46,15 @@ namespace JwtRoledBasedAuth.DbConnection
                 entity.Property(e => e.BusinessEntityID).HasColumnName("BusinessEntityID");
                 entity.Property(e => e.EmailAddressID).HasColumnName("EmailAddressID");
                 entity.Property(e => e.EmailAddress).HasColumnName("EmailAddress");
+                entity.Property(e => e.ModifiedDate).HasColumnName("ModifiedDate");
+            });
+
+            modelBuilder.Entity<EmployeeDepartment>(entity =>
+            {
+                entity.ToTable("HumanResources", "Department");
+                entity.HasKey(e => e.DepartmentID);
+                entity.Property(e => e.Name).HasColumnName("Name");
+                entity.Property(e => e.GroupName).HasColumnName("GroupName");
                 entity.Property(e => e.ModifiedDate).HasColumnName("ModifiedDate");
             });
         }

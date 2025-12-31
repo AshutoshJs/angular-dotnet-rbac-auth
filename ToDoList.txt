@@ -1,0 +1,5 @@
+1- FE pagination
+2- Dynamic Table component
+3- BE and SP based pagination
+3- RBAC
+5- 2FA
